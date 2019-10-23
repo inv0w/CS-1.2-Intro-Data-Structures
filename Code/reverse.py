@@ -1,9 +1,9 @@
 import random, sys
 
-def reverse_word(list):
+def reverse_word(word):
     '''Reverses the letters of words in a list'''
-    reversed_list = [i[::-1] for i in list]
-    return reversed_list
+    reversed_word = [i[::-1] for i in word]
+    return reversed_word
 
 def reverse_sentence(list):
     '''Reverses all the words in a list'''
