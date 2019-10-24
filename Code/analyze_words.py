@@ -19,21 +19,23 @@ def histogram(file):
             histogram.append([word, 1])
     return histogram
 
-# def histogram_dict(file):
-#     '''Reads a given text and counts the number of times a specific word
-#     was within the text. Returns a dictionary.
-#     '''
-#     text = read_file_words(file)
-#     histogram = {}
-#     for word in text:
-#         if word in histogram:
-#             histogram[word] += 1
-#         else:
-#             histogram[word] = 1
-#     return histogram
+def histogram_dict(file):
+    '''Reads a given text and counts the number of times a specific word
+    was within the text. Returns a dictionary.
+    '''
+    text = read_file_words(file)
+    histogram = {}
+    for word in text:
+        if word in histogram:
+            histogram[word] += 1
+        else:
+            histogram[word] = 1
+    return histogram
 
 def unique_words(histogram):
-    '''Uses histogram data and returns the total count of unique words'''
+    '''Uses histogram data and returns the total count of unique words.
+    Works with list of lists.
+    '''
     word_counter = 0
     for list in histogram:
         word_counter += 1
@@ -41,7 +43,7 @@ def unique_words(histogram):
 
 def frequency(word, histogram):
     '''Returns the amount of times a word was seen from a given histogram data
-    set.
+    set. Works with list of lists.
     '''
     for list in histogram:
         if list[0] == word:
@@ -52,6 +54,10 @@ if __name__ == "__main__":
     unique_words = unique_words(histogram)
     word = 'you'
     word_frequency = frequency(word, histogram)
+
     print(histogram)
     print(f'Unique Words: {unique_words}')
     print(f'The amount of times the word "{word}" appeared in the text was: {word_frequency}')
+
+    # histogram_dict = (histogram_dict('textdocs/test.txt'))
+    # print(histogram_dict)
