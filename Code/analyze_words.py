@@ -58,23 +58,36 @@ def unique_words(histogram):
     return len(histogram)
 
 def frequency(word, histogram):
-    '''Returns the amount of times a word was seen from a given histogram data set.'''
+    '''Returns the amount of times a word was seen from a given histogram data set.
+    Works with list of lists or tuples.
+    '''
     for list in histogram:
         if list[0] == word:
             return list[1]
 
+def frequency_dict(word, histogram):
+    '''Returns the amount of times a word was seen from a given histogram data set.
+    Works with dictionary.
+    '''
+    for key, value in histogram.items():
+        if key == word:
+            return value
+
+
 if __name__ == "__main__":
     histogram_list = histogram_list('textdocs/test.txt')
     unique_words = unique_words(histogram_list)
-    word = 'mystery'
+    word = 'go'
     word_frequency = frequency(word, histogram_list)
 
     print(histogram_list)
     print(f'Unique Words: {unique_words}')
     print(f'The amount of times the word "{word}" appeared in the text was: {word_frequency}')
 
-    # histogram_dict = (histogram_dict('textdocs/test.txt'))
-    # print(histogram_dict)
-    #
+    histogram_dict = (histogram_dict('textdocs/test.txt'))
+    word_frequency_dict = frequency_dict(word, histogram_dict)
+    print(histogram_dict)
+    print(word_frequency_dict)
+
     # histogram_tuple = histogram_tuple('textdocs/test.txt')
     # print(histogram_tuple)
