@@ -1,9 +1,10 @@
 def read_file_words(file):
     with open(file, "r") as f:
         words = f.read().split()
+    words = [word.lower() for word in words]
     return words
 
-def histogram(file):
+def histogram_list(file):
     '''Reads a given text and counts the number of times a specific word
     was within the text. Returns a list of lists.
     '''
@@ -40,6 +41,7 @@ def histogram_tuple(file):
     histogram = []
     amount = 0
     for word in text:
+        print(histogram)
         is_updated = False
         for tuple in histogram:
             if tuple[0] == word:
@@ -52,34 +54,27 @@ def histogram_tuple(file):
     return histogram
 
 def unique_words(histogram):
-    '''Uses histogram data and returns the total count of unique words.
-    Works with list of lists.
-    '''
-    word_counter = 0
-    for list in histogram:
-        word_counter += 1
-    return word_counter
+    '''Uses histogram data and returns the total count of unique words.'''
+    return len(histogram)
 
 def frequency(word, histogram):
-    '''Returns the amount of times a word was seen from a given histogram data
-    set. Works with list of lists.
-    '''
+    '''Returns the amount of times a word was seen from a given histogram data set.'''
     for list in histogram:
         if list[0] == word:
             return list[1]
 
 if __name__ == "__main__":
-    histogram = histogram('textdocs/Sherlock.txt')
-    unique_words = unique_words(histogram)
+    histogram_list = histogram_list('textdocs/test.txt')
+    unique_words = unique_words(histogram_list)
     word = 'mystery'
-    word_frequency = frequency(word, histogram)
+    word_frequency = frequency(word, histogram_list)
 
-    print(histogram)
+    print(histogram_list)
     print(f'Unique Words: {unique_words}')
     print(f'The amount of times the word "{word}" appeared in the text was: {word_frequency}')
 
     # histogram_dict = (histogram_dict('textdocs/test.txt'))
     # print(histogram_dict)
     #
-    # histogram_tuple = histogram_tuple('textdocs/Sherlock.txt')
+    # histogram_tuple = histogram_tuple('textdocs/test.txt')
     # print(histogram_tuple)
