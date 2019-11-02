@@ -18,6 +18,7 @@ def sample_by_frequency(histogram):
     for key, value in histogram.items():
         [frequency_list.append(key) for i in range(value)]
     ran_index = random.randint(0, len(frequency_list) - 1)
+
     return frequency_list[ran_index]
 
 def test_sample_by_frequency():
@@ -32,9 +33,23 @@ def test_sample_by_frequency():
 
     return frequency_dict
 
+def get_sentence(histogram, amount=15):
+    '''Uses the sample by frequency function to get weighted words and
+    combine them in a sentence
+
+    histogram: Dictionary
+    amount: int
+    '''
+    words = []
+    for i in range(amount):
+        words.append(sample_by_frequency(histogram))
+    sentence = ' '.join(words)
+
+    return sentence
 
 if __name__ == "__main__":
     arg = f'../Code/textdocs/{sys.argv[1]}'
     words = histogram_dict(arg)
-    print(sample_by_frequency(words))
-    print(test_sample_by_frequency())
+    # print(sample_by_frequency(words))
+    # print(test_sample_by_frequency())
+    print(get_sentence(words, 20))
