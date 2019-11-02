@@ -1,7 +1,10 @@
+import re
+
 def read_file_words(file):
     with open(file, "r") as f:
         words = f.read().split()
-    words = [word.lower() for word in words]
+    words = [re.sub('[^A-Za-z0-9]+', '', word).lower() for word in words]
+
     return words
 
 def histogram_list(file):
