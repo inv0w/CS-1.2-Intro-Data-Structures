@@ -3,7 +3,7 @@ import re
 def read_file_words(file):
     with open(file, "r") as f:
         words = f.read().split()
-    words = [re.sub('[^A-Za-z0-9]+', '', word).lower() for word in words]
+    words = [re.sub('[^A-Za-z]+', '', word).lower() for word in words]
 
     return words
 
