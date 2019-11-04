@@ -4,7 +4,7 @@ from Code.sample import get_sentence
 from Code.analyze_words import histogram_dict
 import os
 
-host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/CS-1.2-Intro-Data-Structures')
+host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/Tweet-Generator')
 client = MongoClient(host=f'{host}?retryWrites=false')
 db = client.get_default_database()
 favorites = db.favorites
