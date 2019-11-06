@@ -3,10 +3,10 @@ import sys
 import random
 import pytest
 
-def sample(histogram):
-    ranindex = random.randint(0, len(histogram) - 1)
-    keys = list(histogram.keys())
-    return keys[ranindex]
+# def sample(histogram):
+#     ranindex = random.randint(0, len(histogram) - 1)
+#     keys = list(histogram.keys())
+#     return keys[ranindex]
 
 def sample_by_frequency(histogram):
     '''Takes in a dictionary histogram and adds the keys to a new list a certain
