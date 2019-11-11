@@ -21,24 +21,73 @@ class Listogram(list):
     def add_count(self, word, count=1):
         """Increase frequency count of given word by given count amount."""
         # TODO: Increase word frequency by count
+        self.tokens += count
+        is_updated = False
+        for list in self:
+            if list[0] == word:
+                list[1] += count
+                is_updated = True
+        if is_updated == False:
+            self.append([word, count])
+            self.types += 1
 
     def frequency(self, word):
         """Return frequency count of given word, or 0 if word is not found."""
         # TODO: Retrieve word frequency count
+        for list in self:
+            if list[0] == word:
+                return list[1]
+        return 0
 
     def __contains__(self, word):
         """Return boolean indicating if given word is in this histogram."""
         # TODO: Check if word is in this histogram
+        for list in self:
+            if list[0] == word:
+                return True
+        return False
 
     def index_of(self, target):
         """Return the index of entry containing given target word if found in
         this histogram, or None if target word is not found."""
         # TODO: Implement linear search to find index of entry with target word
+        for list in self:
+            if list[0] == target:
+                return self.index(list)
+        return None
 
     def sample(self):
         """Return a word from this histogram, randomly sampled by weighting
         each word's probability of being chosen by its observed frequency."""
         # TODO: Randomly choose a word based on its frequency in this histogram
+        frequency_list = []
+        for list in self:
+            [frequency_list.append(list[0]) for i in range(list[1])]
+        ran_index = random.randint(0, len(frequency_list) - 1)
+
+        return frequency_list[ran_index]
+
+    def get_sentence(self, amount=15):
+        '''Uses the sample by frequency function to get weighted words and
+        combine them in a sentence
+
+        histogram: Dictionary
+        amount: int
+        '''
+        words = []
+        for i in range(amount):
+            words.append(sample(self))
+        sentence = ' '.join(words)
+
+        return sentence
+
+    def read_file(file):
+        '''Removes characters not A-Z while making them lowercase'''
+        with open(file, "r") as f:
+            words = f.read().split()
+        words = [re.sub('[^A-Za-z]+', '', word).lower() for word in words]
+
+        return words
 
 
 def print_histogram(word_list):

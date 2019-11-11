@@ -48,7 +48,6 @@ class Dictogram(dict):
 
         return frequency_list[ran_index]
 
-
     def get_sentence(self, amount=15):
         '''Uses the sample by frequency function to get weighted words and
         combine them in a sentence
@@ -62,6 +61,14 @@ class Dictogram(dict):
         sentence = ' '.join(words)
 
         return sentence
+
+    def read_file(file):
+        '''Removes characters not A-Z while making them lowercase'''
+        with open(file, "r") as f:
+            words = f.read().split()
+        words = [re.sub('[^A-Za-z]+', '', word).lower() for word in words]
+
+        return words
 
 def print_histogram(word_list):
     print()
