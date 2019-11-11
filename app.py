@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 from pymongo import MongoClient
-from Code.sample import get_sentence
-from Code.analyze_words import histogram_dict
+from Code.dictogram import Dictogram, read_file
 import os
 
 host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/Tweet-Generator')
@@ -15,8 +14,9 @@ app = Flask(__name__)
 def index():
     """Return Homepage"""
     text = 'Code/textdocs/AirplanesAndSubs.txt'
-    histogram = histogram_dict(text)
-    sentence = get_sentence(histogram, 20)
+    words = read_file(text)
+    histogram = Dictogram(words)
+    sentence = histogram.get_sentence(20)
     return render_template('home.html', tweet=sentence)
 
 if __name__ == '__main__':

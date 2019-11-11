@@ -1,7 +1,7 @@
 #!python
-
 from __future__ import division, print_function  # Python 2 and 3 compatibility
 import random
+import re
 
 
 class Dictogram(dict):
@@ -57,18 +57,18 @@ class Dictogram(dict):
         '''
         words = []
         for i in range(amount):
-            words.append(sample(self))
+            words.append(self.sample())
         sentence = ' '.join(words)
 
         return sentence
 
-    def read_file(file):
-        '''Removes characters not A-Z while making them lowercase'''
-        with open(file, "r") as f:
-            words = f.read().split()
-        words = [re.sub('[^A-Za-z]+', '', word).lower() for word in words]
+def read_file(file):
+    '''Removes characters not A-Z while making them lowercase'''
+    with open(file, "r") as f:
+        words = f.read().split()
+    words = [re.sub('[^A-Za-z]+', '', word).lower() for word in words]
 
-        return words
+    return words
 
 def print_histogram(word_list):
     print()
