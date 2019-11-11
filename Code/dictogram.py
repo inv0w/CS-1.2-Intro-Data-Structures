@@ -21,16 +21,47 @@ class Dictogram(dict):
     def add_count(self, word, count=1):
         """Increase frequency count of given word by given count amount."""
         # TODO: Increase word frequency by count
+        self.tokens += count
+        if self.frequency(word) > 0:
+            self[word] += count
+        else:
+            self[word] = count
+            self.types += 1
+
 
     def frequency(self, word):
         """Return frequency count of given word, or 0 if word is not found."""
         # TODO: Retrieve word frequency count
+        if word in self:
+            return self[word]
+        else:
+            return 0
 
     def sample(self):
         """Return a word from this histogram, randomly sampled by weighting
         each word's probability of being chosen by its observed frequency."""
         # TODO: Randomly choose a word based on its frequency in this histogram
+        frequency_list = []
+        for key, value in self.items():
+            [frequency_list.append(key) for i in range(value)]
+        ran_index = random.randint(0, len(frequency_list) - 1)
 
+        return frequency_list[ran_index]
+
+
+    def get_sentence(self, amount=15):
+        '''Uses the sample by frequency function to get weighted words and
+        combine them in a sentence
+
+        histogram: Dictionary
+        amount: int
+        '''
+        words = []
+        for i in range(amount):
+            words.append(sample(self))
+        sentence = ' '.join(words)
+
+        return sentence
 
 def print_histogram(word_list):
     print()
