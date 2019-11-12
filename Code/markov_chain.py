@@ -19,7 +19,7 @@ def next_chain(word_list, new_word):
 
 
 def walk(word_list, amount):
-    '''Starts off the sentence with a sampled word from initial histogram. Continues
+    '''Starts off the sentence with a sampled word from the initial histogram. Continues
     to sample each new histogram to create a list of words.
 
     word_list = list
@@ -37,7 +37,7 @@ def walk(word_list, amount):
     return sentence
 
 def create_sentence(words):
-    '''Joins words in a list and capitalizes the first word and adds a period
+    '''Joins words in a list, capitalizes the first word and adds a period
     to the end.
 
     words: list
