@@ -19,7 +19,8 @@ def next_chain(word_list, new_word):
 
 
 def walk(word_list, amount):
-    '''
+    '''Starts off the sentence with a sampled word from initial histogram. Continues
+    to sample each new histogram to create a list of words.
 
     word_list = list
     amount = int
@@ -45,7 +46,6 @@ def create_sentence(words):
     f_sentence = ' '.join(words) + '.'
 
     return f_sentence
-
 
 
 if __name__ == '__main__':
