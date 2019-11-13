@@ -111,6 +111,7 @@ class LinkedList(object):
         # Hint: raise ValueError('Item not found: {}'.format(item))
         previous_node = None
         current_node = self.head
+        is_found = False
         if self.head is None: #If there are no nodes
             raise ValueError('Item not found: {}'.format(item))
 
@@ -123,6 +124,7 @@ class LinkedList(object):
         else:
             while current_node is not None:
                 if current_node.data == item:
+                    is_found = True
                     if previous_node is None: #If node was the first one
                         self.head = current_node.next
                     elif current_node == self.tail: #If node was the last one
@@ -130,10 +132,10 @@ class LinkedList(object):
                         previous_node.next = None
                     else:
                         previous_node.next = current_node.next
-
                 previous_node = current_node
                 current_node = current_node.next
-        #1 Test not working
+            if is_found is False:
+                raise ValueError('Item not found: {}'.format(item))
 
 def test_linked_list():
     ll = LinkedList()
