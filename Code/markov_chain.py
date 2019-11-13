@@ -1,4 +1,4 @@
-from Code.dictogram import Dictogram, read_file
+from dictogram import Dictogram, read_file
 import random
 
 

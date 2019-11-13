@@ -77,7 +77,7 @@ class LinkedList(object):
         """Insert the given item at the head of this linked list.
         Running time: O(1) because we have instant access to what the head is."""
         node = Node(item)
-        if self.head is not None:
+        if not self.is_empty(): #If there are nodes
             node.next = self.head
         else:
             self.tail = node
@@ -89,7 +89,7 @@ class LinkedList(object):
         the given quality, we are done.
         Worst case running time: O(n) because we are searching through all n
         nodes and we are could check all of them."""
-        if self.head is not None:
+        if not self.is_empty(): #If there are nodes
             current_node = self.head
             while current_node is not None:
                 if quality(current_node.data) is True:
@@ -108,7 +108,7 @@ class LinkedList(object):
         previous_node = None
         current_node = self.head
         is_found = False
-        if self.head is None: #If there are no nodes
+        if self.is_empty(): #If there are no nodes
             raise ValueError('Item not found: {}'.format(item))
 
         elif self.head == self.tail: #If there is only one node
