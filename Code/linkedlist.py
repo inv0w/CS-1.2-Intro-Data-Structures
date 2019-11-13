@@ -121,6 +121,7 @@ class LinkedList(object):
                 self.tail = None
             else:
                 raise ValueError('Item not found: {}'.format(item))
+
         else:
             while current_node is not None:
                 if current_node.data == item:
