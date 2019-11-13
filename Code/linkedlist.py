@@ -125,7 +125,6 @@ class LinkedList(object):
                 if current_node.data == item:
                     if previous_node is None: #If node was the first one
                         self.head = current_node.next
-
                     elif current_node == self.tail: #If node was the last one
                         self.tail = previous_node
                         previous_node.next = None
