@@ -29,10 +29,11 @@ def walk(word_list, amount):
     main_histogram = Dictogram(word_list)
     next_word = main_histogram.sample()
     sentence.append(next_word)
-    for i in range(amount):
+    for i in range((amount) - 1):
         chain = next_chain(word_list, next_word)
-        next_word = chain.sample()
-        sentence.append(next_word)
+        if len(chain) > 0:
+            next_word = chain.sample()
+            sentence.append(next_word)
 
     return sentence
 
@@ -49,5 +50,5 @@ def create_sentence(words):
 
 
 if __name__ == '__main__':
-    word_list = ['one', 'fish', 'two', 'fish', 'red', 'fish', 'blue', 'fish']
+    word_list = ['one', 'fish', 'two', 'fish', 'red', 'fish', 'blue', 'fish', 'cat']
     print(create_sentence(walk(word_list, 15)))
