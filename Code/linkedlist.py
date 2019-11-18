@@ -55,7 +55,8 @@ class LinkedList(object):
     def length(self):
         """Return the length of this linked list by traversing its nodes.
         Running time: O(n) because we are checking each node n times to see
-        if it contains another node."""
+        if it contains another node.
+        Best case: O(1) if empty."""
         length = 0
         current_node = self.head
         while current_node is not None:
