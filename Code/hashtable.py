@@ -67,7 +67,7 @@ class HashTable(object):
     def contains(self, key):
         """Return True if this hash table contains the given key, or False.
         TODO: Running time: O(n) for checking every key inside the current bucket."""
-        bucket_index = self.buckets[self._bucket_index(key)]
+        bucket_index = self.get_bucket(key)
         for current_key, value in bucket_index.items():
             if current_key  == key:
                 return True
@@ -76,7 +76,7 @@ class HashTable(object):
     def get(self, key):
         """Return the value associated with the given key, or raise KeyError.
         TODO: Running time: O(n) for checking every key inside the current bucket."""
-        bucket_index = self.buckets[self._bucket_index(key)]
+        bucket_index = self.get_bucket(key)
         for current_key, value in bucket_index.items():
             if current_key == key:
                 return value
@@ -86,7 +86,7 @@ class HashTable(object):
     def set(self, key, value):
         """Insert or update the given key with its associated value.
         TODO: Running time: O(n) for checking every key inside the current bucket."""
-        bucket_index = self.buckets[self._bucket_index(key)]
+        bucket_index = self.get_bucket(key)
         if self.contains(key):
             for current_key, value in bucket_index.items():
                 if current_key == key:
@@ -98,13 +98,16 @@ class HashTable(object):
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
         TODO: Running time: O(n) for checking every key inside the current bucket."""
-        bucket_index = self.buckets[self._bucket_index(key)]
+        bucket_index = self.get_bucket(key)
         if self.contains(key):
             for current_key, value in bucket_index.items():
                 if current_key == key:
                     bucket_index.delete((current_key, value))
         else:
             raise KeyError(f'Key not found {key}')
+
+    def get_bucket(self, key):
+        return self.buckets[self._bucket_index(key)]
 
 def test_hash_table():
     ht = HashTable()
