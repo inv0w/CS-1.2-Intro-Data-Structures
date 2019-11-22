@@ -107,6 +107,7 @@ class HashTable(object):
             raise KeyError('Key not found: {}'.format(key))
 
     def get_bucket(self, key):
+        """Return the bucket based off the hash value of the key"""
         return self.buckets[self._bucket_index(key)]
 
 def test_hash_table():
