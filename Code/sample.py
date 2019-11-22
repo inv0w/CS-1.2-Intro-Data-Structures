@@ -1,4 +1,4 @@
-from Code.analyze_words import read_file_words, histogram_dict
+from analyze_words import read_file_words, histogram_dict
 import sys
 import random
 import pytest
