@@ -104,7 +104,7 @@ class HashTable(object):
                 if current_key == key:
                     bucket_index.delete((current_key, value))
         else:
-            raise KeyError(f'Key not found {key}')
+            raise KeyError('Key not found: {}'.format(key))
 
     def get_bucket(self, key):
         return self.buckets[self._bucket_index(key)]
