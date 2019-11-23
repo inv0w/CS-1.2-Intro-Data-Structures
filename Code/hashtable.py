@@ -88,9 +88,9 @@ class HashTable(object):
         Running time: O(n) for checking every key inside the current bucket."""
         curr_bucket = self.get_bucket(key)
         if self.contains(key):
-            for current_key, curr_value in curr_bucket.items():
+            for current_key, current_value in curr_bucket.items():
                 if current_key == key:
-                    curr_bucket.delete((current_key, curr_value))
+                    curr_bucket.delete((current_key, current_value))
                     curr_bucket.append((key, value))
         else:
             curr_bucket.append((key, value))
