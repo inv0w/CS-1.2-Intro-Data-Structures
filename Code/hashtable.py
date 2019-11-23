@@ -67,8 +67,8 @@ class HashTable(object):
     def contains(self, key):
         """Return True if this hash table contains the given key, or False.
         Running time: O(n) for checking every key inside the current bucket."""
-        current_bucket = self.get_bucket(key)
-        for current_key, value in current_bucket.items():
+        bucket = self.get_bucket(key)
+        for current_key, value in bucket.items():
             if current_key  == key:
                 return True
         return False
@@ -76,8 +76,8 @@ class HashTable(object):
     def get(self, key):
         """Return the value associated with the given key, or raise KeyError.
         Running time: O(n) for checking every key inside the current bucket."""
-        current_bucket = self.get_bucket(key)
-        for current_key, value in current_bucket.items():
+        bucket = self.get_bucket(key)
+        for current_key, value in bucket.items():
             if current_key == key:
                 return value
         raise KeyError('Key not found: {}'.format(key))
@@ -86,23 +86,23 @@ class HashTable(object):
     def set(self, key, value):
         """Insert or update the given key with its associated value.
         Running time: O(n) for checking every key inside the current bucket."""
-        current_bucket = self.get_bucket(key)
+        bucket = self.get_bucket(key)
         if self.contains(key):
-            for current_key, current_value in current_bucket.items():
+            for current_key, current_value in bucket.items():
                 if current_key == key:
-                    current_bucket.delete((current_key, current_value))
-                    current_bucket.append((key, value))
+                    bucket.delete((current_key, current_value))
+                    bucket.append((key, value))
         else:
-            current_bucket.append((key, value))
+            bucket.append((key, value))
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
         Running time: O(n) for checking every key inside the current bucket."""
-        current_bucket = self.get_bucket(key)
+        bucket = self.get_bucket(key)
         if self.contains(key):
-            for current_key, value in current_bucket.items():
+            for current_key, value in bucket.items():
                 if current_key == key:
-                    current_bucket.delete((current_key, value))
+                    bucket.delete((current_key, value))
         else:
             raise KeyError('Key not found: {}'.format(key))
 
