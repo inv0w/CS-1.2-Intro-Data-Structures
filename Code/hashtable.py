@@ -66,7 +66,7 @@ class HashTable(object):
 
     def contains(self, key):
         """Return True if this hash table contains the given key, or False.
-        TODO: Running time: O(n) for checking every key inside the current bucket."""
+        Running time: O(n) for checking every key inside the current bucket."""
         bucket_index = self.get_bucket(key)
         for current_key, value in bucket_index.items():
             if current_key  == key:
@@ -75,7 +75,7 @@ class HashTable(object):
 
     def get(self, key):
         """Return the value associated with the given key, or raise KeyError.
-        TODO: Running time: O(n) for checking every key inside the current bucket."""
+        Running time: O(n) for checking every key inside the current bucket."""
         bucket_index = self.get_bucket(key)
         for current_key, value in bucket_index.items():
             if current_key == key:
@@ -85,7 +85,7 @@ class HashTable(object):
 
     def set(self, key, value):
         """Insert or update the given key with its associated value.
-        TODO: Running time: O(n) for checking every key inside the current bucket."""
+        Running time: O(n) for checking every key inside the current bucket."""
         bucket_index = self.get_bucket(key)
         if self.contains(key):
             for current_key, value in bucket_index.items():
@@ -97,7 +97,7 @@ class HashTable(object):
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
-        TODO: Running time: O(n) for checking every key inside the current bucket."""
+        Running time: O(n) for checking every key inside the current bucket."""
         bucket_index = self.get_bucket(key)
         if self.contains(key):
             for current_key, value in bucket_index.items():
