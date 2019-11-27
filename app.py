@@ -16,7 +16,7 @@ def index():
     """Return Homepage"""
     text = 'Code/textdocs/Scarletletter.txt'
     words = read_file(text)
-    sentence = create_sentence(walk(words, 15))
+    sentence = create_sentence(walk(words, 20))
     return render_template('home.html', tweet=sentence)
 
 if __name__ == '__main__':
