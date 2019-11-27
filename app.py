@@ -14,7 +14,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     """Return Homepage"""
-    text = 'Code/textdocs/AirplanesAndSubs.txt'
+    text = 'Code/textdocs/Scarletletter.txt'
     words = read_file(text)
     sentence = create_sentence(walk(words, 15))
     return render_template('home.html', tweet=sentence)

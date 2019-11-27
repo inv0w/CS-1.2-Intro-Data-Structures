@@ -2,5 +2,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{{ tweet }}</h1>
+<div class="container text-light">
+<div class="row">
+    <div class="col-md-6 offset-3" style="padding-top: 5%">
+        <h1>The Scarlett Letter</h1>
+            <div class="d-flex justify-content-center align-items-center" style="padding-top: 45%">
+                <div class="text-center">
+                    <h2>{{ tweet }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
