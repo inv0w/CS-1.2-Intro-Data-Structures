@@ -26,7 +26,7 @@ class HashTable(object):
 
     def keys(self):
         """Return a list of all keys in this hash table.
-        Running time: """
+         Running time: O(n) because we are traversing through each node in every bucket."""
         # Collect all keys in each bucket
         all_keys = []
         for bucket in self.buckets:
@@ -36,7 +36,7 @@ class HashTable(object):
 
     def values(self):
         """Return a list of all values in this hash table.
-        Running time: """
+        Running time: O(n) because we are traversing through each node in every bucket."""
         all_values = []
         for bucket in self.buckets:
             for key, value in bucket.items():
@@ -45,7 +45,8 @@ class HashTable(object):
 
     def items(self):
         """Return a list of all items (key-value pairs) in this hash table.
-        Running time: """
+        Running time: best and average case O(n) because we are traversing through
+        each node in every bucket."""
         # Collect all pairs of key-value entries in each bucket
         all_items = []
         for bucket in self.buckets:
@@ -54,7 +55,8 @@ class HashTable(object):
 
     def length(self):
         """Return the number of key-value entries by traversing its buckets.
-        Running time: """
+        Running time: best and average case O(n) because we are traversing through
+        each node in every bucket."""
         size = 0
         for bucket in self.buckets:
             size += bucket.length()
@@ -62,7 +64,10 @@ class HashTable(object):
 
     def contains(self, key):
         """Return True if this hash table contains the given key, or False.
-        Running time: """
+        Running time:
+        Best case: O(1) if the first item in the bucket is our matching value.
+        Average case: O(L) *O(n/b) We get the hash code of our given key and divide the
+        length n by the number of buckets b to get L."""
         bucket = self.get_bucket(key)
         for current_key, value in bucket.items():
             if current_key  == key:
@@ -71,7 +76,10 @@ class HashTable(object):
 
     def get(self, key):
         """Return the value associated with the given key, or raise KeyError.
-        Running time: """
+        Running time:
+        Best case: O(1) if the first item in the bucket is our matching value.
+        Average case: O(L) *O(n/b) We get the hash code of our given key and divide the
+        length n by the number of buckets b to get L."""
         bucket = self.get_bucket(key)
         for current_key, value in bucket.items():
             if current_key == key:
@@ -81,7 +89,10 @@ class HashTable(object):
 
     def set(self, key, value):
         """Insert or update the given key with its associated value.
-        Running time: """
+        Running time:
+        Best case: O(1) if the first item in the bucket is our matching value.
+        Average case: O(L) *O(n/b) We get the hash code of our given key and divide the
+        length n by the number of buckets b to get ."""
         bucket = self.get_bucket(key)
         if self.contains(key):
             for current_key, current_value in bucket.items():
@@ -93,7 +104,10 @@ class HashTable(object):
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
-        Running time: """
+        Running time:
+        Best case: O(1) if the first item in the bucket is our matching value.
+        Average case: O(L) *O(n/b) We get the hash code of our given key and divide the
+        length n by the number of buckets b to get L."""
         bucket = self.get_bucket(key)
         if self.contains(key):
             for current_key, value in bucket.items():
