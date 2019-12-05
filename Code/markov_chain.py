@@ -1,5 +1,29 @@
-from .dictogram import Dictogram, read_file
+from dictogram import Dictogram, read_file
 import random
+
+
+def higher_order(word_list, new_words, order=2):
+    ''''''
+    dicti = dict()
+    key_words = new_words.split()
+    words = []
+    next_words = []
+    next_pairs = []
+
+    for i in range(len(word_list) - 1): #For each word in the word list
+        words.clear()
+        for j in range(order): #n is number of Markov Order
+            words.append(word_list[i + j]) #0 + 0 + 0 #0 + 0 + 1 (2)
+        # print(words)
+        if words == key_words: #If the words in the word list match our new words
+            next_words.clear()
+            for j in range(order):
+                next_words.append(word_list[i + (j + 1)]) #0 + 0 + 1 #0 + 1 + 1 (2)
+            next_words_str = ' '.join(next_words)
+            next_pairs.append(next_words_str)
+
+    dicti[new_words] = Dictogram(next_pairs)
+    return dicti
 
 
 def next_chain(word_list, new_word):
@@ -50,5 +74,6 @@ def create_sentence(words):
 
 
 if __name__ == '__main__':
-    word_list = ['one', 'fish', 'two', 'fish', 'red', 'fish', 'blue', 'fish', 'cat']
-    print(create_sentence(walk(word_list, 15)))
+    word_list = ['fish', 'two', 'fish', 'one', 'fish', 'two', 'fish', 'two', 'red', 'red', 'fish', 'blue', 'fish', 'cat']
+    # print(create_sentence(walk(word_list, 15)))
+    print(higher_order(word_list, 'fish two'))
