@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from pymongo import MongoClient
 from Code.dictogram import read_file
-from Code.markov_chain import create_sentence, walk
+from Code.markov_chain import create_sentence, higher_walk
 import os
 
 host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/Tweet-Generator')
@@ -16,7 +16,7 @@ def index():
     """Return Homepage"""
     text = 'Code/textdocs/Scarletletter.txt'
     words = read_file(text)
-    sentence = create_sentence(walk(words, 20))
+    sentence = create_sentence(higher_walk(words, 20, 2))
     return render_template('home.html', tweet=sentence)
 
 if __name__ == '__main__':

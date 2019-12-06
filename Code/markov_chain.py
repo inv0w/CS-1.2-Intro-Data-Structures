@@ -1,8 +1,8 @@
-from dictogram import Dictogram, read_file
+from .dictogram import Dictogram, read_file
 import random
 
 
-def higher_order(word_list, new_words, order=2):
+def higher_order_chain(word_list, new_words, order=2):
     '''Traverses through word_list and combines them into a string. How many words
     in the new string is based on the order number. If this string matches new_words
     add the new words to a list and combine it into a string.
@@ -34,28 +34,42 @@ def higher_order(word_list, new_words, order=2):
     return dicti
 
 
-def higher_order_walk(word_list, amount): #working partially for 2nd order
+def higher_walk(word_list, amount, order=2):
+    '''Initially gets sample words from main histogram sampling. Then uses the higher
+    order chain to generating a full sentence using the order number. Amount will
+    be the length of the sentence.
+
+    word_list = str
+    amount = int
+    order = int
+    '''
     sentence = []
     next_words_list = []
     main_histogram = Dictogram(word_list)
 
     #Getting initial starting words
     next_word = main_histogram.sample()
-    chain = next_chain(word_list, next_word)
-    following_word = chain.sample()
-    #
     next_words_list.append(next_word)
-    next_words_list.append(following_word)
+    chain = next_chain(word_list, next_word)
+
+    #Gets additional words based off the order
+    for i in range(order - 1):
+        if len(chain) > 0:
+            following_word = chain.sample()
+            next_words_list.append(following_word)
+            chain = next_chain(word_list, following_word)
+
     words_str = " ".join(next_words_list)
     sentence.append(words_str)
 
-    for i in range(amount - 1):
+    #Generating full sentence
+    for i in range(amount - order):
         next_words_list.clear()
-        chain = higher_order(word_list, words_str)
-        if len(chain) > 0:
+        chain = higher_order_chain(word_list, words_str, order)
+        if len(chain[words_str]) > 0:
             words_str = chain[words_str].sample()
             next_words_list = words_str.split()
-            sentence.append(next_words_list[1])
+            sentence.append(next_words_list[order - 1])
 
     sentence = " ".join(sentence)
     return sentence
@@ -77,24 +91,24 @@ def next_chain(word_list, new_word):
     return chain
 
 
-def walk(word_list, amount):
-    '''Starts off the sentence with a sampled word from the initial histogram. Continues
-    to sample each new histogram to create a list of words.
-
-    word_list = list
-    amount = int
-    '''
-    sentence = []
-    main_histogram = Dictogram(word_list)
-    next_word = main_histogram.sample()
-    sentence.append(next_word)
-    for i in range((amount) - 1):
-        chain = next_chain(word_list, next_word)
-        if len(chain) > 0:
-            next_word = chain.sample()
-            sentence.append(next_word)
-
-    return sentence
+# def walk(word_list, amount):
+#     '''Starts off the sentence with a sampled word from the initial histogram. Continues
+#     to sample each new histogram to create a list of words.
+#
+#     word_list = list
+#     amount = int
+#     '''
+#     sentence = []
+#     main_histogram = Dictogram(word_list)
+#     next_word = main_histogram.sample()
+#     sentence.append(next_word)
+#     for i in range((amount) - 1):
+#         chain = next_chain(word_list, next_word)
+#         if len(chain) > 0:
+#             next_word = chain.sample()
+#             sentence.append(next_word)
+#
+#     return sentence
 
 def create_sentence(words):
     '''Joins words in a list, capitalizes the first word and adds a period
@@ -102,15 +116,16 @@ def create_sentence(words):
 
     words: list
     '''
-    words[0] = words[0].capitalize()
-    f_sentence = ' '.join(words) + '.'
+    split_words = words.split()
+    split_words[0] = split_words[0].capitalize()
+    f_sentence = ' '.join(split_words) + '.'
 
     return f_sentence
 
 
 if __name__ == '__main__':
     word_list = ['fish', 'two', 'fish', 'one', 'fish', 'two', 'fish', 'two', 'red', 'red', 'fish', 'blue', 'fish', 'cat']
-    # print(create_sentence(walk(word_list, 15)))
+    print(create_sentence(higher_walk(word_list, 15, 2)))
     # print(next_chain(word_list, 'fish'))
-    print(higher_order(word_list, 'fish two'))
-    print(higher_order_walk(word_list, 10))
+    # print(higher_order(word_list, 'fish two'))
+    # print(higher_walk(word_list, 10))
