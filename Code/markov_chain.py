@@ -3,7 +3,15 @@ import random
 
 
 def higher_order(word_list, new_words, order=2):
-    ''''''
+    '''Traverses through word_list and combines them into a string. How many words
+    in the new string is based on the order number. If this string matches new_words
+    add the new words to a list and combine it into a string.
+    (Pair programmed with Anika Morris)
+
+    word_list = str
+    new_words = str
+    order = int
+    '''
     dicti = dict()
     key_words = new_words.split()
     words = []
@@ -12,7 +20,7 @@ def higher_order(word_list, new_words, order=2):
 
     for i in range(len(word_list) - 1): #For each word in the word list
         words.clear()
-        for j in range(order): #n is number of Markov Order
+        for j in range(order): #order is number from Markov Order
             words.append(word_list[i + j]) #0 + 0 + 0 #0 + 0 + 1 (2)
         # print(words)
         if words == key_words: #If the words in the word list match our new words
@@ -24,6 +32,10 @@ def higher_order(word_list, new_words, order=2):
 
     dicti[new_words] = Dictogram(next_pairs)
     return dicti
+
+
+def higher_order_walk(dictionary, word_list, amount):
+    pass
 
 
 def next_chain(word_list, new_word):
@@ -75,5 +87,7 @@ def create_sentence(words):
 
 if __name__ == '__main__':
     word_list = ['fish', 'two', 'fish', 'one', 'fish', 'two', 'fish', 'two', 'red', 'red', 'fish', 'blue', 'fish', 'cat']
+    dict = Dictogram(word_list)
     # print(create_sentence(walk(word_list, 15)))
-    print(higher_order(word_list, 'fish two'))
+    # print(higher_order(word_list, 'fish two'))
+    print(higher_order_walk(higher_order(word_list, dict.sample_higher()), word_list, 5))
