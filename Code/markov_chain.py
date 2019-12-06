@@ -1,4 +1,4 @@
-from .dictogram import Dictogram, read_file
+from dictogram import Dictogram, read_file
 import random
 
 
@@ -33,10 +33,34 @@ def higher_order_chain(word_list, new_words, order=2):
     dicti[new_words] = Dictogram(next_pairs)
     return dicti
 
+def order_sample(word_list, order=2):
+    '''Gets initial words from sampling to start higher_walk.
+
+    word_list = str
+    order = int
+    '''
+    next_words = []
+    main_histogram = Dictogram(word_list)
+
+    #Getting initial starting words
+    next_word = main_histogram.sample()
+    next_words.append(next_word)
+    chain = next_chain(word_list, next_word)
+
+    #Gets additional words based off the order
+    for i in range(order - 1):
+        if len(chain) > 0:
+            following_word = chain.sample()
+            next_words.append(following_word)
+            chain = next_chain(word_list, following_word)
+
+    sample = " ".join(next_words)
+    return sample
+
 
 def higher_walk(word_list, amount, order=2):
-    '''Initially gets sample words from main histogram sampling. Then uses the higher
-    order chain to generating a full sentence using the order number. Amount will
+    '''First uses initial sample words to start the chain. Then uses the higher
+    order chain to generate a full sentence using the order number. Amount will
     be the length of the sentence.
 
     word_list = str
@@ -44,32 +68,21 @@ def higher_walk(word_list, amount, order=2):
     order = int
     '''
     sentence = []
-    next_words_list = []
-    main_histogram = Dictogram(word_list)
+    next_words = []
 
-    #Getting initial starting words
-    next_word = main_histogram.sample()
-    next_words_list.append(next_word)
-    chain = next_chain(word_list, next_word)
-
-    #Gets additional words based off the order
-    for i in range(order - 1):
-        if len(chain) > 0:
-            following_word = chain.sample()
-            next_words_list.append(following_word)
-            chain = next_chain(word_list, following_word)
-
-    words_str = " ".join(next_words_list)
+    #Initializing the starting sample words
+    words_str = order_sample(word_list, order)
     sentence.append(words_str)
+    next_words.append(words_str)
 
-    #Generating full sentence
+    #Generating the full sentence from amount number
     for i in range(amount - order):
-        next_words_list.clear()
+        next_words.clear()
         chain = higher_order_chain(word_list, words_str, order)
         if len(chain[words_str]) > 0:
             words_str = chain[words_str].sample()
-            next_words_list = words_str.split()
-            sentence.append(next_words_list[order - 1])
+            next_words = words_str.split()
+            sentence.append(next_words[order - 1])
 
     sentence = " ".join(sentence)
     return sentence
@@ -129,3 +142,4 @@ if __name__ == '__main__':
     # print(next_chain(word_list, 'fish'))
     # print(higher_order(word_list, 'fish two'))
     # print(higher_walk(word_list, 10))
+    # print(order_sample(word_list, 2))
