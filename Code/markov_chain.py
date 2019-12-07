@@ -1,6 +1,5 @@
-from .dictogram import Dictogram, read_file
+from dictogram import Dictogram, read_file
 import random
-
 
 def higher_order_chain(word_list, new_words, order=2):
     '''Traverses through word_list and combines them into a string. How many words
@@ -73,16 +72,15 @@ def higher_walk(word_list, amount, order=2):
     #Initializing the starting sample words
     words_str = order_sample(word_list, order)
     sentence.append(words_str)
-    next_words.append(words_str)
 
     #Generating the full sentence from amount number
     for i in range(amount - order):
         next_words.clear()
-        chain = higher_order_chain(word_list, words_str, order)
+        chain = higher_order_chain(word_list, words_str, order) #Returns n order length of words
         if len(chain[words_str]) > 0:
             words_str = chain[words_str].sample()
             next_words = words_str.split()
-            sentence.append(next_words[order - 1])
+            sentence.append(next_words[order - 1]) #Only get one item of next words to not repeat center word.
 
     sentence = " ".join(sentence)
     return sentence
@@ -103,6 +101,17 @@ def next_chain(word_list, new_word):
     chain = Dictogram(chain_list)
     return chain
 
+def create_sentence(words):
+    '''Joins words in a list, capitalizes the first word and adds a period
+    to the end.
+
+    words: list
+    '''
+    split_words = words.split()
+    split_words[0] = split_words[0].capitalize()
+    f_sentence = ' '.join(split_words) + '.'
+
+    return f_sentence
 
 # def walk(word_list, amount):
 #     '''Starts off the sentence with a sampled word from the initial histogram. Continues
@@ -123,17 +132,7 @@ def next_chain(word_list, new_word):
 #
 #     return sentence
 
-def create_sentence(words):
-    '''Joins words in a list, capitalizes the first word and adds a period
-    to the end.
 
-    words: list
-    '''
-    split_words = words.split()
-    split_words[0] = split_words[0].capitalize()
-    f_sentence = ' '.join(split_words) + '.'
-
-    return f_sentence
 
 
 if __name__ == '__main__':
