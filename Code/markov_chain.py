@@ -3,7 +3,13 @@ import random
 
 
 class Markov():
-    '''Generates a sentence using any order and a given amount'''
+    '''Generates a sentence using a list of words using stochastic sampling
+    to traverse through the list.
+
+    word_list: list
+    amount: int
+    order: int
+    '''
 
     def __init__(self, word_list, amount, order=2):
         """Initilize starting variables"""
