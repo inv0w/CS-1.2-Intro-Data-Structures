@@ -21,7 +21,7 @@ class Markov():
         new_words = str
         order = int
         '''
-        dicti = dict()
+        dict_chain = dict()
         key_words = new_words.split()
         words = []
         next_words = []
@@ -39,8 +39,8 @@ class Markov():
                 next_words_str = ' '.join(next_words)
                 next_pairs.append(next_words_str)
 
-        dicti[new_words] = Dictogram(next_pairs)
-        return dicti
+        dict_chain[new_words] = Dictogram(next_pairs)
+        return dict_chain
 
     def order_sample(self):
         '''Gets initial words from sampling to start higher_walk.
@@ -124,6 +124,7 @@ class Markov():
         return f_sentence
 
     def main(self):
+        '''Combines all necessary functions to create final sentence.'''
         words = self.higher_walk()
         sentence = self.create_sentence(words)
         return sentence
@@ -147,8 +148,6 @@ class Markov():
 #             sentence.append(next_word)
 #
 #     return sentence
-
-
 
 
 if __name__ == '__main__':
