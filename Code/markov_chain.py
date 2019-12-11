@@ -124,7 +124,7 @@ class Markov():
         return f_sentence
 
     def main(self):
-        '''Combines all necessary functions to create final sentence.'''
+        '''Combines all necessary functions to create a final sentence.'''
         words = self.higher_walk()
         sentence = self.create_sentence(words)
         return sentence
