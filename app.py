@@ -4,7 +4,6 @@ from Code.markov_chain import Markov
 from twitter import tweet
 import os
 
-
 host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/Tweet-Generator')
 client = MongoClient(host=f'{host}?retryWrites=false')
 db = client.get_default_database()
