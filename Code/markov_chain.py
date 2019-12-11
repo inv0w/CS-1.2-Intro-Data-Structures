@@ -3,7 +3,7 @@ import random
 
 
 class Markov():
-    '''Generates a sentence using a list of words using stochastic sampling
+    '''Generates a sentence from a list of words using stochastic sampling
     to traverse through the list.
 
     word_list: list
