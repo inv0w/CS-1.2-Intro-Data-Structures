@@ -17,9 +17,7 @@ class Markov():
         add the new words to a list and combine it into a string.
         (Pair programmed with Anika Morris)
 
-        word_list = str
-        new_words = str
-        order = int
+        new_words: str
         '''
         dict_chain = dict()
         key_words = new_words.split()
@@ -43,11 +41,7 @@ class Markov():
         return dict_chain
 
     def order_sample(self):
-        '''Gets initial words from sampling to start higher_walk.
-
-        word_list = str
-        order = int
-        '''
+        '''Gets initial words from sampling to start higher_walk.'''
         next_words = []
         main_histogram = Dictogram(self.word_list)
 
@@ -71,10 +65,6 @@ class Markov():
         '''First uses initial sample words to start the chain. Then uses the higher
         order chain to generate a full sentence using the order number. Amount will
         be the length of the sentence.
-
-        word_list = str
-        amount = int
-        order = int
         '''
         sentence = []
         next_words = []
@@ -100,8 +90,7 @@ class Markov():
         '''If a word is found and equals next_word, append the next word in the list.
         Then create a new histogram with the list of following words.
 
-        word_list = list
-        new_word = str
+        new_word: str
         '''
         chain_list = []
         for i in range(len(self.word_list) - 1):
