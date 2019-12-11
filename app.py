@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for
 from pymongo import MongoClient
-from Code.dictogram import read_file
 from Code.markov_chain import Markov
+from twitter import tweet
 import os
+
 
 host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/Tweet-Generator')
 client = MongoClient(host=f'{host}?retryWrites=false')
@@ -15,9 +16,15 @@ app = Flask(__name__)
 def index():
     """Return Homepage"""
     text = 'Code/textdocs/Scarletletter.txt'
-    markov = Markov(read_file(text), 20)
+    markov = Markov(text, 20)
     sentence = markov.main()
     return render_template('home.html', tweet=sentence)
+
+@app.route('/tweet', methods=['POST'])
+def tweets():
+    status = request.form['sentence']
+    tweet(status)
+    return redirect('/')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 5000))

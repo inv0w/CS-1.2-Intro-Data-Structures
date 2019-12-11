@@ -17,6 +17,9 @@ class Markov():
         self.amount = amount
         self.order = order
 
+        if self.word_list is not None:
+            self.word_list = read_file(word_list)
+
     def higher_order_chain(self, new_words):
         '''Traverses through word_list and combines them into a string. How many words
         in the new string is based on the order number. If this string matches new_words
