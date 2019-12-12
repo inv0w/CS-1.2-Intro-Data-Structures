@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from pymongo import MongoClient
 from Code.markov_chain import Markov
 from twitter import tweet
+from __future__ import unicode_literals
 import os
 
 host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/Tweet-Generator')
