@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from flask import Flask, render_template, request, redirect, url_for
 from pymongo import MongoClient
 from Code.markov_chain import Markov
