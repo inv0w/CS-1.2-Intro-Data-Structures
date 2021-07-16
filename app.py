@@ -10,12 +10,12 @@ db = client.get_default_database()
 favorites = db.favorites
 
 app = Flask(__name__)
+text = 'Code/textdocs/Scarletletter.txt'
+markov = Markov(text, 20)
 
 @app.route('/')
 def index():
     """Return Homepage"""
-    text = 'Code/textdocs/Scarletletter.txt'
-    markov = Markov(text, 20)
     sentence = markov.main()
     return render_template('home.html', tweet=sentence)
 
